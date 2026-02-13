@@ -238,7 +238,7 @@ After the user responds, construct the review payload.
 <selected findings only>
 
 ---
-*Reviewed with [pr-review-agent](https://github.com/smart-niggs/pr-review-agent)*
+*Reviewed with [codepass](https://github.com/smart-niggs/codepass)*
 ```
 
 **Build inline comments** for each selected finding:

@@ -1,4 +1,4 @@
-# pr-review-agent
+# codepass
 
 Single-pass PR review plugin for Claude Code. Posts inline GitHub comments, checks Copilot suggestions, validates test plans, and auto-determines review disposition — all in one context window (~40-60K tokens).
 
@@ -10,13 +10,14 @@ Single-pass PR review plugin for Claude Code. Posts inline GitHub comments, chec
 ## Installation
 
 ```bash
-claude mcp add-from-claude-plugin smart-niggs/pr-review-agent
+claude plugin marketplace add smart-niggs/codepass
+claude plugin install codepass
 ```
 
 Or for local development:
 
 ```bash
-claude --plugin-dir /path/to/pr-review-agent
+claude --plugin-dir /path/to/codepass
 ```
 
 ## Usage
@@ -25,13 +26,13 @@ From any git repository with a GitHub remote:
 
 ```bash
 # Review a PR by number
-/review-pr 219
+/codepass 219
 
 # Review a PR by URL
-/review-pr https://github.com/org/repo/pull/219
+/codepass https://github.com/org/repo/pull/219
 
 # Analyze without posting (dry run)
-/review-pr 219 --dry-run
+/codepass 219 --dry-run
 ```
 
 ## Features
@@ -61,7 +62,7 @@ After analysis, choose which findings to post:
 ### Token Efficient
 | Approach | Tokens | Agents |
 |----------|--------|--------|
-| **pr-review-agent** | **~40-60K** | **0** |
+| **codepass** | **~40-60K** | **0** |
 | /code-review plugin | ~150-200K | 8+ |
 | /pr-review-toolkit | ~200-300K | 6 |
 
