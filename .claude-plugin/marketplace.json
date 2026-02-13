@@ -1,0 +1,20 @@
+{
+  "name": "smart-niggs-tools",
+  "owner": {
+    "name": "smartniggs",
+    "email": "smartniggs@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "PR review and code quality tools",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "pr-review-agent",
+      "source": "./plugins/pr-review-agent",
+      "description": "Single-pass PR review with inline GitHub comments, Copilot checking, test plan validation, and smart auto-disposition",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 {
   "name": "pr-review-agent",
+  "version": "1.0.0",
   "description": "Single-pass PR review with inline GitHub comments, Copilot checking, test plan validation, and smart auto-disposition",
   "author": {
-    "name": "smart-niggs",
-    "email": "chukwuemeka@fincra.com"
+    "name": "smartniggs",
+    "email": "smartniggs@users.noreply.github.com"
   }
 }
