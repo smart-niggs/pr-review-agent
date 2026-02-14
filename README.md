@@ -16,13 +16,20 @@ claude plugin install codepass
 
 ## Usage
 
-From any git repository with a GitHub remote:
+Open Claude Code inside any git repository with a GitHub remote:
 
 ```bash
-# Review a PR in your current repo (by number)
+# Start Claude Code in your repo
+claude
+```
+
+Then use the slash command inside Claude Code:
+
+```bash
+# Review a PR by number
 /codepass:pr-review 219
 
-# Review a PR in any repo (by URL)
+# Review a PR by URL
 /codepass:pr-review https://github.com/org/repo/pull/219
 
 # Analyze without posting (dry run)
@@ -53,12 +60,21 @@ After analysis, choose which findings to post:
 - `critical+high` — Post by severity threshold
 - `none` — Skip posting
 
-### Token Efficient
-| Approach | Tokens | Agents |
-|----------|--------|--------|
-| **codepass** | **~40-60K** | **0** |
-| /code-review plugin | ~150-200K | 8+ |
-| /pr-review-toolkit | ~200-300K | 6 |
+## How It Compares
+
+| Tool | Cost | Context | Convention Awareness | Structured Analysis | Disposition Logic | Status |
+|------|------|---------|---------------------|--------------------|--------------------|--------|
+| **codepass** | **Free** | **Changed files + diff + metadata (single pass)** | **Yes (CLAUDE.md)** | **8 dimensions** | **Yes** | **Active** |
+| [ai-pr-reviewer](https://github.com/coderabbitai/ai-pr-reviewer) | Free (BYOK) | Diff chunks (incremental) | No | None | No | Unmaintained |
+| [ai-codereviewer](https://github.com/villesau/ai-codereviewer) | Free (BYOK) | Diff chunks (one-shot) | No | None | No | Unmaintained |
+| [CodeRabbit](https://coderabbit.ai) | $12-24/dev/mo | Full repo clone + code graph + semantic index | Config files | Multi-linter (40+) | Yes | Active |
+| [Copilot PR Review](https://docs.github.com/en/copilot) | $10-39/dev/mo | Diff + agentic file retrieval | `.github/copilot-instructions.md` | Risk scoring | No | Active |
+| [Qodo Merge](https://github.com/qodo-ai/pr-agent) | Free (OSS) / $30-45/dev/mo | Diff + token budgeting + chunking | Config files (paid) | Single LLM call | No | Active |
+
+**What makes codepass different:**
+- **Convention-first** — reads your `CLAUDE.md` and cites specific rule violations. No other tool does this natively.
+- **Single-pass, zero agents** — ~40-60K tokens per review vs. 150-300K for multi-agent alternatives.
+- **You control what gets posted** — selective posting by finding number or severity threshold. No auto-spam.
 
 ## How It Works
 
@@ -72,7 +88,9 @@ After analysis, choose which findings to post:
 
 ## Configuration
 
-No configuration needed. The plugin:
+No configuration needed — but works best when your repo has a `CLAUDE.md` with project conventions. Without one, codepass skips convention checks and still reviews the other 7 dimensions.
+
+The plugin:
 - Detects repo owner/name from your current directory (`gh repo view`) or from the provided URL
 - Uses your `gh` CLI authentication for GitHub API calls
 - Reads `CLAUDE.md` files dynamically from whatever repo you're in
