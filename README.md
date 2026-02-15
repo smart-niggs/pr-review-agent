@@ -1,6 +1,6 @@
 # codepass
 
-Single-pass PR review plugin for Claude Code. Posts inline GitHub comments, checks Copilot suggestions, validates test plans, and auto-determines review disposition — all in one context window (~40-60K tokens).
+Single-pass PR review plugin for Claude Code. Posts inline GitHub comments, checks Copilot suggestions, validates test plans, and auto-determines review disposition.
 
 ## Prerequisites
 
@@ -73,29 +73,49 @@ After analysis, choose which findings to post:
 
 **What makes codepass different:**
 - **Convention-first** — reads your `CLAUDE.md` and cites specific rule violations. No other tool does this natively.
-- **Single-pass, zero agents** — ~40-60K tokens per review vs. 150-300K for multi-agent alternatives.
+- **Single-pass, zero agents** — one context window, no agent spawning.
 - **You control what gets posted** — selective posting by finding number or severity threshold. No auto-spam.
 
 ## How It Works
 
-1. Parses PR number or URL from your input
-2. Fetches PR metadata, diff, and review threads (3 parallel API calls)
-3. Reads local CLAUDE.md conventions and changed files
-4. Analyzes across 8 dimensions in a single pass
-5. Presents structured findings with severity and confidence scores
-6. Asks which findings to post and whether to override disposition
-7. Posts review with inline comments to GitHub
+1. Verifies `gh` authentication
+2. Parses PR number or URL, resolves repo with `--repo` for all API calls
+3. Fetches PR metadata, diff, and review threads (3 parallel API calls)
+4. Warns if PR has 50+ changed files
+5. Reads CLAUDE.md conventions from the **base branch** (not the PR head)
+6. Fetches changed files — uses GitHub API for fork PRs, skips binaries/lockfiles
+7. Analyzes across 8 dimensions in a single pass
+8. Presents structured findings with severity and confidence scores
+9. Asks which findings to post and whether to override disposition
+10. Posts review with inline comments pinned to the specific commit SHA
 
 ## Configuration
 
 No configuration needed — but works best when your repo has a `CLAUDE.md` with project conventions. Without one, codepass skips convention checks and still reviews the other 7 dimensions.
 
 The plugin:
-- Detects repo owner/name from your current directory (`gh repo view`) or from the provided URL
-- Uses your `gh` CLI authentication for GitHub API calls
-- Reads `CLAUDE.md` files dynamically from whatever repo you're in
+- Detects repo from your current directory or from the provided URL
+- Uses your `gh` CLI authentication for all GitHub API calls
+- Reads `CLAUDE.md` files from the base branch of whatever repo the PR targets
 - Posts reviews under your own GitHub account
+- Pins reviews to the PR's head commit SHA to avoid stale line comments
+
+## Limitations
+
+- **Review threads**: Fetches up to 100 threads with 20 comments each
+- **Binary/lock files**: Automatically skipped
+- **Large PRs**: Warns at 50+ files. Files prioritized by diff size.
+- **Fork PRs**: Requires the fork repo to be accessible to your `gh` token
+- **Duplicate reviews**: Running twice creates a second review (GitHub doesn't support editing reviews)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Security
+
+See [SECURITY.md](SECURITY.md).
 
 ## License
 
-MIT
+[MIT](LICENSE)

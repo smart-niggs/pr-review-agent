@@ -1,9 +1,22 @@
 {
   "name": "codepass",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Single-pass PR review with inline GitHub comments, Copilot checking, test plan validation, and smart auto-disposition",
   "author": {
     "name": "smartniggs",
     "email": "smartniggs@users.noreply.github.com"
-  }
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/smart-niggs/codepass",
+  "repository": "https://github.com/smart-niggs/codepass",
+  "keywords": [
+    "code-review",
+    "pull-request",
+    "github",
+    "pr-review",
+    "static-analysis",
+    "claude-code",
+    "conventions",
+    "claude-md"
+  ]
 }

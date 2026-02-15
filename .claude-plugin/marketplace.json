@@ -5,16 +5,20 @@
     "email": "smartniggs@users.noreply.github.com"
   },
   "metadata": {
-    "description": "PR review and code quality tools",
-    "version": "1.0.0",
-    "pluginRoot": "./plugins"
+    "description": "PR review and code quality tools for Claude Code",
+    "version": "1.1.0",
+    "pluginRoot": "./plugins",
+    "license": "MIT",
+    "homepage": "https://github.com/smart-niggs/codepass",
+    "repository": "https://github.com/smart-niggs/codepass",
+    "keywords": ["pr-review", "code-quality", "github", "conventions"]
   },
   "plugins": [
     {
       "name": "codepass",
       "source": "./plugins/codepass",
       "description": "Single-pass PR review with inline GitHub comments, Copilot checking, test plan validation, and smart auto-disposition",
-      "version": "1.0.0"
+      "version": "1.1.0"
     }
   ]
 }
