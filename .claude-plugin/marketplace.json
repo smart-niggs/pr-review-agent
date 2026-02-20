@@ -1,24 +1,30 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "smart-niggs-tools",
   "owner": {
     "name": "smartniggs",
-    "email": "smartniggs@users.noreply.github.com"
+    "email": "smart-niggs@users.noreply.github.com"
   },
   "metadata": {
     "description": "PR review and code quality tools for Claude Code",
     "version": "1.1.0",
-    "pluginRoot": "./plugins",
-    "license": "MIT",
-    "homepage": "https://github.com/smart-niggs/codepass",
-    "repository": "https://github.com/smart-niggs/codepass",
-    "keywords": ["pr-review", "code-quality", "github", "conventions"]
+    "pluginRoot": "./plugins"
   },
   "plugins": [
     {
       "name": "codepass",
-      "source": "./plugins/codepass",
       "description": "Single-pass PR review with inline GitHub comments, Copilot checking, test plan validation, and smart auto-disposition",
-      "version": "1.1.0"
+      "version": "1.1.0",
+      "author": {
+        "name": "smartniggs",
+        "email": "smart-niggs@users.noreply.github.com"
+      },
+      "source": "./plugins/codepass",
+      "category": "productivity",
+      "homepage": "https://github.com/smart-niggs/codepass",
+      "repository": "https://github.com/smart-niggs/codepass",
+      "license": "MIT",
+      "keywords": ["code-review", "pr-review", "github", "conventions"]
     }
   ]
 }
